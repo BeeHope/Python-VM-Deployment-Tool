@@ -1,24 +1,24 @@
 vcenter:
-  host: 10.11.4.245
-  username: administrator@vsphere.local
-  password_env: VCENTER_PASSWORD  # export this env var instead of hard‑coding
-  validate_certs: false
+  host: 10.11.4.73                           # vCenter Server IP/FQDN
+  username: Administrator@vsphere.local       # vCenter username
+  password_env: VCENTER_PASSWORD              # Environment variable name
+  validate_certs: false                       # SSL certificate validation
 
 vms:
-  - name: websrv-02
-    template: vm2
-    datacenter: Datacenter
-    cluster: cluster1
-    datastore: datastore1
-    hardware:
-      cpu: 2
-      memory_mb: 4096
-      disk_gb: 40
-    network:
-      name: VLAN_100
-      ip: 10.11.4.101
-      netmask: 255.255.255.0
-      gateway: 10.11.4.1
-      dns:
+  - name: websrv-01                          # VM name (must be unique)
+    template: Ubuntu-20                       # Source template name
+    datacenter: Datacenter                    # Target datacenter
+    cluster: cluster1                         # Target cluster
+    datastore: datastore1                     # Target datastore
+    hardware:                                 # Hardware specifications
+      cpu: 2                                  # Number of vCPUs
+      memory_mb: 4096                         # Memory in MB
+      disk_gb: 40                             # Disk size in GB
+    network:                                  # Network configuration
+      name: VLAN_100                          # Port group name
+      ip: 10.11.4.100                         # Static IP address
+      netmask: 255.255.255.0                  # Subnet mask
+      gateway: 10.11.4.1                      # Default gateway
+      dns:                                    # DNS servers
         - 8.8.8.8
         - 8.8.4.4
